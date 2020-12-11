@@ -20,9 +20,13 @@ project_networks = {
         "10.0.2.0/24",
         "10.0.4.0/24",
     ]
-    subnet_names = [
+    public_subnet_names = [
         "management-1",
         "management-2",
+    ]
+    private_subnet_names = [
+        "app-1",
+        "app-2",
     ]
 }
 tags = {
