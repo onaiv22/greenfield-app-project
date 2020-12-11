@@ -5,9 +5,15 @@ provider "aws" {
 }
 
 # create networking vpc
-module "network" {
-    source     = "./modules/networking"
+module "vpc" {
+    source     = "./modules/vpc"
     vpc_cidr = var.vpc_cidr
     
+}
+
+module "subnets" {
+    source     = "./modules/networking"
+    networks   = var.project_networks
+    vpc_id     = module.vpc.vpc_id 
 }
     
