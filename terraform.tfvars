@@ -20,6 +20,10 @@ project_networks = {
         "10.0.2.0/24",
         "10.0.4.0/24",
     ]
+    subnet_names = [
+        "management-1",
+        "management-2",
+    ]
 }
 tags = {
   project_name      = "greenfield-app-server"

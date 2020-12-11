@@ -12,3 +12,6 @@ output "vpc_id" {
   value = module.vpc.vpc_id
 }
 
+output "gw_id" {
+    value = module.vpc.gw_id
+}

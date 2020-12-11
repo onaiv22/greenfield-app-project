@@ -14,6 +14,7 @@ module "vpc" {
 module "subnets" {
     source     = "./modules/networking"
     networks   = var.project_networks
-    vpc_id     = module.vpc.vpc_id 
+    vpc_id     = module.vpc.vpc_id
+    gw_id      = module.vpc.gw_id 
 }
     
