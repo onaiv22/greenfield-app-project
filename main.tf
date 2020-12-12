@@ -8,7 +8,7 @@ provider "aws" {
 module "vpc" {
     source     = "./modules/vpc"
     vpc_cidr = var.vpc_cidr
-    
+
 }
 
 module "subnets" {
@@ -18,3 +18,9 @@ module "subnets" {
     gw_id      = module.vpc.gw_id 
 }
     
+module "asg" {
+    source     = "./modules/asg" 
+    ami        = var.ami
+    vpc_id     = module.vpc.vpc_id
+    key_name   = var.key_name
+}

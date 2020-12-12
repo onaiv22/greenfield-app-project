@@ -1,5 +1,7 @@
-profile = "devops-engineer"
-region = "eu-west-1"
+profile   = "devops-engineer"
+region    = "eu-west-1"
+ami       = "ami-0fb8881276a9bc6e8"
+key_name  = "devops-keypair"
 
 # VPC Networking range
 vpc_cidr = "10.0.0.0/16"
@@ -29,10 +31,10 @@ project_networks = {
         "app-2",
     ]
 }
-tags = {
-  project_name      = "greenfield-app-server"
-  owner             = "femi okuta"
-  email             = "onaiv83@gmail.com"
-  costcentre        = "ConsolidatedBilling"
-  live              = "no"
-}
+# tags = {
+#   project_name      = "greenfield-app-server"
+#   owner             = "femi okuta"
+#   email             = "onaiv83@gmail.com"
+#   costcentre        = "ConsolidatedBilling"
+#   live              = "no"
+# }
