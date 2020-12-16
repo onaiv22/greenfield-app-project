@@ -43,3 +43,11 @@ module "nginx-asg" {
     public_subnet_ids = module.subnets.public_subnet_id
     description       = "launch template for nginx instances"
 }
+
+module "nginx-alb" {
+    source             = "./modules/alb"
+    name               = "nginx-alb"
+    security_groups_id = module.subnets.alb_id
+    subnets            = module.subnets.public_subnet_id
+    vpc_id            = module.vpc.vpc_id  
+}
