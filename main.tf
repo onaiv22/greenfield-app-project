@@ -18,9 +18,28 @@ module "subnets" {
     gw_id      = module.vpc.gw_id 
 }
     
-module "asg" {
-    source     = "./modules/asg" 
-    ami        = var.ami
-    vpc_id     = module.vpc.vpc_id
-    key_name   = var.key_name
+module "bastion-asg" {
+    source            = "./modules/asg" 
+    ami               = var.ami
+    name              = "bastion-asg"
+    vpc_id            = module.vpc.vpc_id
+    key_name          = var.key_name
+    user_data         = filebase64("bootstrap.sh")
+    security_group_id = module.subnets.bastion-sg_id
+    launch_template   = module.bastion-asg.launch_template_id
+    public_subnet_ids = module.subnets.public_subnet_id
+    description       = "launch template for bastion instances"
+}
+
+module "nginx-asg" {
+    source            = "./modules/asg"
+    ami               = var.ami 
+    name              = "nginx-asg"
+    vpc_id            = module.vpc.vpc_id  
+    key_name          = var.key_name
+    user_data         = filebase64("bootstrap-nginx.sh")
+    security_group_id = module.subnets.nginx_id
+    launch_template   = module.nginx-asg.launch_template_id
+    public_subnet_ids = module.subnets.public_subnet_id
+    description       = "launch template for nginx instances"
 }
