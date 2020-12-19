@@ -2,6 +2,7 @@ variable "profile" {}
 variable "region" {}
 variable "key_name" {}
 variable "ami" {}
+
 variable "vpc_cidr" {
     type = string
     default = "10.0.0.0/16"
@@ -26,4 +27,8 @@ output "alb_id" {
 
 output "nginx_id" {
     value = module.subnets.nginx_id
+}
+
+output "lambda_role" {
+    value = module.s3-source.lambda_role
 }

@@ -82,12 +82,12 @@ locals {
         cidr_blocks = ["80.5.79.0/24"]
     },
     {
-        port = 22
+        port = "22"
         description = "allow traffic from thornton heath"
         cidr_blocks = ["80.195.205.0/24"]
     },
     {
-        port = 22
+        port = "22"
         description = "allow traffic from vpc network"
         cidr_blocks = ["10.0.0.0/16"]
     }]

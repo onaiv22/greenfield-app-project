@@ -51,3 +51,14 @@ module "nginx-alb" {
     subnets            = module.subnets.public_subnet_id
     vpc_id            = module.vpc.vpc_id  
 }
+
+ module "s3-source" {
+     source         = "./modules/serverless"
+     
+ }
+
+# module "s3-processed" {
+#     source = "./modules/serverless"
+#     acl    = "private"
+#     access-log-name = "private-bucket-access-logs"
+# }
