@@ -8,5 +8,9 @@ resource "aws_launch_template" "main" {
     vpc_security_group_ids               = [var.security_group_id]
     description                          = var.description 
     update_default_version               = true
+    tags = {
+        Name = "stone"
+
+    }
     
 }

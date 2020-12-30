@@ -8,12 +8,27 @@ data "aws_iam_policy_document" "s3_policy" {
       resources = [aws_s3_bucket.main[0].arn]
     }
     statement {
-      actions = ["s3:GetObject"]
-      resources = ["${aws_s3_bucket.main[0].arn}/*"]
+      actions = [
+          "s3:GetObject",
+          "s3:GetObjectTagging"
+          ]
+      resources = [
+          "${aws_s3_bucket.main[0].arn}/*",
+          "${aws_s3_bucket.main[2].arn}/*",
+          "${aws_s3_bucket.main[3].arn}/*"
+          ]
     }
     statement {
-        actions = ["s3:PutObject"]
-        resources =["${aws_s3_bucket.main[1].arn}/*"]
+        actions = [
+            "s3:PutObject",
+            "s3:PutObjectTagging",
+            "s3:PutObjectVersionTagging"
+            ]
+        resources =[
+            "${aws_s3_bucket.main[1].arn}/*",
+            "${aws_s3_bucket.main[2].arn}/*",
+            "${aws_s3_bucket.main[3].arn}/*"
+            ]
     }
     statement {
         actions = [
@@ -22,6 +37,16 @@ data "aws_iam_policy_document" "s3_policy" {
             "logs:CreateLogStream"
             ]
         resources = ["arn:aws:logs:*:*:*"]    
+    }
+    statement {
+        actions = [
+            "sns:Publish"
+        ]
+        resources = [
+            aws_sns_topic.main[0].arn,
+            aws_sns_topic.main[1].arn
+            
+            ]
     }
 }
 ###################################################################################
@@ -43,9 +68,10 @@ data "aws_iam_policy_document" "lambda_assume_role" {
 ###################################################################################
 
 resource "aws_iam_role" "lambda_role" {
-    name               = "lambda-s3-role"
+    name               = "bucket-antivirus-update"
     assume_role_policy = data.aws_iam_policy_document.lambda_assume_role.json
     path               = "/"
+    force_detach_policies = true
 }
 ###################################################################################
 # create lambda role policy with permissions to s3 buckets
