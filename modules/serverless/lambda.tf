@@ -5,7 +5,7 @@ resource "aws_lambda_function" "main" {
     s3_bucket         = aws_s3_bucket.main[3].id
     s3_key            = aws_s3_bucket_object.object.key
     role              = aws_iam_role.lambda_role.arn 
-    runtime           = "python2.7"
+    runtime           = "python3.7"
     memory_size       = "2048"
     timeout           = "600"
     environment {

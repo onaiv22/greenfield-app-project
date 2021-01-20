@@ -28,6 +28,7 @@ resource "aws_cloudwatch_event_rule" "main" {
 
 resource "aws_cloudwatch_event_target" "main" {
     rule = aws_cloudwatch_event_rule.main.id
+    target_id = "InvokeLambda"
     arn  = aws_lambda_function.main["DefinitionUpdateLambda"].arn
 
 }

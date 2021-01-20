@@ -4,13 +4,23 @@
 ##################################################################################
 data "aws_iam_policy_document" "s3_policy" {
     statement {
-      actions = ["s3:ListBucket"]
-      resources = [aws_s3_bucket.main[0].arn]
+      actions = [
+          "s3:ListBucket",
+          "s3:DeleteObject",
+          "s3:GetObjectTagging",
+          ]
+      resources = [
+          aws_s3_bucket.main[0].arn,
+          aws_s3_bucket.main[2].arn
+          ]
     }
     statement {
       actions = [
           "s3:GetObject",
-          "s3:GetObjectTagging"
+          "s3:GetObjectTagging",
+          "s3:ListBucket",
+          "s3:GetObjectVersion",
+          "s3:DeleteObject",
           ]
       resources = [
           "${aws_s3_bucket.main[0].arn}/*",
@@ -22,9 +32,14 @@ data "aws_iam_policy_document" "s3_policy" {
         actions = [
             "s3:PutObject",
             "s3:PutObjectTagging",
-            "s3:PutObjectVersionTagging"
+            "s3:PutObjectVersionTagging",
+            "s3:GetObject",
+            "s3:GetObjectTagging",
+            "s3:GetObjectVersion",
+            "s3:ListBucket",
             ]
         resources =[
+            "${aws_s3_bucket.main[0].arn}/*",
             "${aws_s3_bucket.main[1].arn}/*",
             "${aws_s3_bucket.main[2].arn}/*",
             "${aws_s3_bucket.main[3].arn}/*"
@@ -32,7 +47,7 @@ data "aws_iam_policy_document" "s3_policy" {
     }
     statement {
         actions = [
-            "logs:PutLogEvent",
+            "logs:PutLogEvents",
             "logs:CreateLogGroup",
             "logs:CreateLogStream"
             ]
@@ -40,11 +55,20 @@ data "aws_iam_policy_document" "s3_policy" {
     }
     statement {
         actions = [
+            "cloudwatch:PutMetricData"
+        ]
+        resources = [
+            "*",
+        ]
+    }
+    statement {
+        actions = [
             "sns:Publish"
         ]
         resources = [
-            aws_sns_topic.main[0].arn,
-            aws_sns_topic.main[1].arn
+            # aws_sns_topic.main[0].arn,
+            # aws_sns_topic.main[1].arn,
+            var.sns,
             
             ]
     }

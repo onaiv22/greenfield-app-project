@@ -54,9 +54,14 @@ module "nginx-alb" {
 
  module "s3-source" {
      source         = "./modules/serverless"
+     sns            = module.s3-source.arn
      
  }
 
+module "waf" {
+    source = "./modules/waf"
+
+}
 # module "s3-processed" {
 #     source = "./modules/serverless"
 #     acl    = "private"

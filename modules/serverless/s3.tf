@@ -1,13 +1,14 @@
  resource "aws_s3_bucket" "access-logs" {
      bucket = "access-logs19122020"
      acl    = "log-delivery-write"
+     force_destroy = true
  }
 
  resource "aws_s3_bucket" "main" {
      count  = length(var.s3-bucket-names)
      bucket = element(var.s3-bucket-names, count.index)
      acl    = "private"
-     force_destroy = false
+     force_destroy = true
 
      versioning {
        enabled = true
@@ -23,17 +24,13 @@
      }
  }
 
- data "archive_file" "main" {
-     type = "zip"
-     source_dir = "/Users/femi.okuta/lambda-s3-bucket-clamav/lambda-s3-bucket-clamav/bin/"
-     output_path = "clamav-scan.zip"
- }
+ 
 
  resource "aws_s3_bucket_object" "object" {
      bucket = aws_s3_bucket.main[3].id
-     key    = "clamav-scanner/clamav-scanner.v1.0.0.zip"
-     source = data.archive_file.main.output_path
+     key    = "clamav-scanner/lambda.zip"
+     source = "lambda.zip" 
      acl    = "bucket-owner-full-control"
-     etag   = filemd5("clamav-scan.zip")
+     etag   = filemd5("lambda.zip")
 }
 

@@ -32,10 +32,4 @@ project_networks = {
     ]
 }
 
-# tags = {
-#   project_name      = "greenfield-app-server"
-#   owner             = "femi okuta"
-#   email             = "onaiv83@gmail.com"
-#   costcentre        = "ConsolidatedBilling"
-#   live              = "no"
-# }
+# waf components
