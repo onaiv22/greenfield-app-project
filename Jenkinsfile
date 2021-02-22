@@ -6,6 +6,7 @@ pipeline {
     environment {
         AWS_ACESS_KEY_ID = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_KEY_ID =credentials('jenkins-aws-secret-key-id')
+        TF_HOME = tool('terraform')
 
     }
     stages {
