@@ -19,14 +19,13 @@ pipeline {
         }
         stage('terraform init') {
             steps {
-                withAWS(credentials: 'aws-credentials', region: 'eu-west-1') {
-                    sh 'terraform init'
+                sh 'terraform init'
                 }
-            }
         }
     }
-    
-}    
+        
+}
+        
     
 
 
