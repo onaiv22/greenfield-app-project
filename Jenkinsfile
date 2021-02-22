@@ -2,6 +2,9 @@
 
 pipeline {
     agent any
+    tools {
+       terraform 'terraform'
+    }
 
     environment {
         AWS_ACESS_KEY_ID = credentials('jenkins-aws-secret-key-id')
