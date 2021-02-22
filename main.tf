@@ -62,6 +62,11 @@ module "waf" {
     source = "./modules/waf"
 
 }
+
+module "k8s" {
+    source = "./modules/k8s-setup"
+
+}
 # module "s3-processed" {
 #     source = "./modules/serverless"
 #     acl    = "private"

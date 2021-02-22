@@ -8,7 +8,7 @@ resource "aws_wafv2_regex_pattern_set" "adroit_regex" {
     }
 
     regular_expression {
-      regex_string = "two"
+      regex_string = "%00%01%04%1b%08%5c%7f"
     }
 
     regular_expression {

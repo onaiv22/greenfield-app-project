@@ -36,3 +36,7 @@ output "nginx_id" {
 output "lambda_role" {
     value = module.s3-source.lambda_role
 }
+
+output "s3-bucket-name" {
+     value = module.k8s.s3-bucket-name
+ }

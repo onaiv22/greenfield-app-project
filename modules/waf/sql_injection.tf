@@ -41,6 +41,14 @@ resource "aws_wafregional_sql_injection_match_set" "adroit_sql_injection_match_s
           type = "URI"
       }
     }
+
+    sql_injection_match_tuple {
+      text_transformation = "HTML_ENTITY_DECODE"
+
+      field_to_match {
+          type = "URI"
+      }
+    }
   
 }
 

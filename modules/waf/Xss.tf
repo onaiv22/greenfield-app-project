@@ -30,6 +30,22 @@ resource "aws_wafregional_xss_match_set" "adroit_xss_match_set" {
       text_transformation = "URL_DECODE"
 
       field_to_match {
+          type = "BODY"
+      }
+    }
+
+    xss_match_tuple {
+      text_transformation = "URL_DECODE"
+
+      field_to_match {
+          type = "URI"
+      }
+    }
+
+    xss_match_tuple {
+      text_transformation = "HTML_ENTITY_DECODE"
+
+      field_to_match {
           type = "URI"
       }
     }
@@ -47,3 +63,13 @@ resource "aws_wafregional_rule" "adroit_xss_waf_rule" {
     }
     
 }
+
+/* to do 
+xss_match_tuple {
+      text_transformation = "HTML_ENTITY_DECODE" and another block for URL_DECODE
+
+      field_to_match {
+          type = "HEADER"
+          data = "cookie"
+      }
+    } */
