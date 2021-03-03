@@ -14,4 +14,3 @@ node ('any') {
     stage('terraform init') {
         sh "'${terraform}' init"
     }
-}
