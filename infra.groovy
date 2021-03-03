@@ -1,4 +1,4 @@
-node ('any') {
+node {
     def TF_HOME = tool 'terraform'
     def terraform = TF_HOME
     def AWS_ACESS_KEY_ID = build.getEnvironment(jenkins-aws-secret-key-id)
