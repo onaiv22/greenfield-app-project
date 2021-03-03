@@ -1,26 +1,17 @@
-pipelineJob(femi) {
-    agent any
-    tools {
-       terraform 'terraform'
-    }
+node ('any') {
+    def TF_HOME = tool 'terraform'
+    def terraform = TF_HOME
+    def AWS_ACESS_KEY_ID = build.getEnvironment(jenkins-aws-secret-key-id)
     environment {
         AWS_ACESS_KEY_ID = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_KEY_ID =credentials('jenkins-aws-secret-key-id')
-        TF_HOME = tool('terraform')
     }
-    stages {
-        stage('checkout SCM') {
-            steps {
-                echo "my build number is ${env.BUILD_NUMBER}"
-                echo "My branch is ${env.BRANCH_NAME}"
-                checkout scm
-            }
 
-        }
-        stage('terraform init') {
-            steps {
-                sh 'terraform init'
-            }
-        }
+    }
+    stage('checkout scm') {
+        git 'https://github.com/onaiv22/greenfield-app-project.git'
+    }
+    stage('terraform init') {
+        sh "'${terraform}' init"
     }
 }
