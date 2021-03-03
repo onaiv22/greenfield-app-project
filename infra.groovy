@@ -1,4 +1,4 @@
-pipeline {
+pipelineJob {
     agent any
     tools {
        terraform 'terraform'
