@@ -4,6 +4,11 @@ provider "aws" {
     #version = "2.60"
 }
 
+provider "aws" {
+  alias   = "useast1"
+  region   = "us-east-1"
+}
+
 # create networking vpc
 module "vpc" {
     source     = "./modules/vpc"
@@ -67,8 +72,22 @@ module "k8s" {
     source = "./modules/k8s-setup"
 
 }
-# module "s3-processed" {
-#     source = "./modules/serverless"
-#     acl    = "private"
-#     access-log-name = "private-bucket-access-logs"
-# }
+
+module "static" {
+    source = "./modules/maintenance"
+    certificate_arn = module.acm.cert_issued
+    
+}
+
+module "acm" {
+    source = "./modules/acm"
+    providers = {
+        aws = aws.useast1
+    }  
+
+}
+
+output "cert" {
+    value = "module.acm.cert"
+}
+

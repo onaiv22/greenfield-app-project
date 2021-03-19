@@ -32,4 +32,8 @@ project_networks = {
     ]
 }
 
-# waf components
+# cloudfront components
+cld-region = "us-east-1"
+environment = "prod"
+goaldomain = "*.onaivstone.co.uk"
+site-index = "sitemaintenance.html"

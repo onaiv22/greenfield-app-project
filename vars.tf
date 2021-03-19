@@ -1,7 +1,12 @@
+
+
+
+
 variable "profile" {}
 variable "region" {}
 variable "key_name" {}
 variable "ami" {}
+variable "cld-region" {}
 
 #lambda variables
 variable "vpc_cidr" {
