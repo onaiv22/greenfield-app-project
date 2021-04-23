@@ -1,10 +1,10 @@
 resource "aws_wafv2_web_acl" "main" {
-    name        = "webacl"
-    description = "webacl_description"
-    scope       = "REGIONAL"
+    name        = var.webacl_name
+    description = var.webacl_description
+    scope       = var.scope
 
     default_action {
-        block {}
+        allow {}
     }
     
     tags = {
@@ -24,7 +24,7 @@ resource "aws_wafv2_web_acl" "main" {
         statement {
           managed_rule_group_statement {
             name = rule.value["name"]
-            vendor_name = "AWS"
+            vendor_name = lookup(var.vendor_name, "vendor_name", "AWS")
           }
         }
         visibility_config {
@@ -39,4 +39,9 @@ resource "aws_wafv2_web_acl" "main" {
       cloudwatch_metrics_enabled = true 
       sampled_requests_enabled = true
     }
+  }
+
+  output "waf_acl" {
+    value = aws_wafv2_web_acl.main.arn
+
   }

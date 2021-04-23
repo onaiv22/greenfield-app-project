@@ -9,7 +9,7 @@ resource "aws_launch_template" "main" {
     description                          = var.description 
     update_default_version               = true
     tags = {
-        Name = "stone"
+        Name = "fidelty-demo"
 
     }
     

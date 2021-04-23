@@ -25,12 +25,12 @@ resource "aws_kinesis_firehose_delivery_stream" "waf_logs_stream" {
   
 }
 
-# resource "aws_wafv2_acl_logging_configuration" "main" {
-#     log_destination_configs = [aws_kinesis_firehose_delivery_stream.waf_logs_stream.arn]
-#     resource_arn            = aws_wafv2_web_acl.main.arn 
-#     redacted_fields {     #this is the parts of the request that you dont want to log e.g all_query_arguments, single_header, uri_path, method, body, single_query_argument etc
-#         single_header {
-#             name = "user_agent"
-#         }
-#     }      
-# }
+resource "aws_wafv2_web_acl_logging_configuration" "main" {
+    log_destination_configs = [aws_kinesis_firehose_delivery_stream.waf_logs_stream.arn]
+    resource_arn            = aws_wafv2_web_acl.main.arn 
+    redacted_fields {     #this is the parts of the request that you dont want to log e.g all_query_arguments, single_header, uri_path, method, body, single_query_argument etc
+        single_header {
+            name = "user_agent"
+        }
+    }      
+}

@@ -20,10 +20,20 @@ variable "scope" {
   EOD
 }
 
+variable "vendor_name"{
+  type = map 
+  default = {
+    vendor_name = "AWS"
+  }
+
+}
+
 variable "waf_rule_list" {
+  type = list
   default = [
-    {"name" : "AWSManagedRulesCommonRuleSet", "rule_name": "AWS-AWSManagedRulesCommonRuleSet", "priority": "0"},
-    {"name" : "AWSManagedRulesAmazonIpReputationList", "rule_name": "AWS-AWSManagedRulesAmazonIpReputationList", "priority" : "1"},
-    {"name" : "AWSManagedRulesSQLiRuleSet", "rule_name" : "AWS-AWSManagedRulesSQLiRuleSet" , "priority" : "2"}
+    {"rule_name": "AWS-AWSManagedRulesCommonRuleSet", "name" : "AWSManagedRulesCommonRuleSet", "priority": "0"},
+    {"rule_name": "AWS-AWSManagedRulesAmazonIpReputationList", "name" : "AWSManagedRulesAmazonIpReputationList", "priority" : "1"},
+    {"rule_name": "AWS-AWSManagedRulesKnownBadInputsRuleSet", "name" : "AWSManagedRulesKnownBadInputsRuleSet", "priority" : "2"},
+    {"rule_name": "AWS-AWSManagedRulesSQLiRuleSet", "name": "AWSManagedRulesSQLiRuleSet", "priority" : "3"}
   ]
 }
