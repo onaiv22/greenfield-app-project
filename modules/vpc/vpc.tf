@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = "true"
 
   tags = {
-    "Name" = "fidelity-demo"
+    "Name" = "devops-infrastructure"
   }
 }
 

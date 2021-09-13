@@ -22,6 +22,12 @@ module "subnets" {
     vpc_id     = module.vpc.vpc_id
     gw_id      = module.vpc.gw_id 
 }
+
+module "aws-batch" {
+    source     = "./modules/aws-batch"
+    vpc_id = module.vpc.vpc_id 
+    public_subnet_ids = module.subnets.public_subnet_id[0]
+}
     
 module "bastion-asg" {
     source            = "./modules/asg" 
