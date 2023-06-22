@@ -74,24 +74,24 @@ module "waf" {
 
 }
 
-module "k8s" {
-    source = "./modules/k8s-setup"
+# module "k8s" {
+#     source = "./modules/k8s-setup"
 
-}
+# }
 
-module "static" {
-    source = "./modules/maintenance"
-    certificate_arn = module.acm.cert_issued
+# module "static" {
+#     source = "./modules/maintenance"
+#     certificate_arn = module.acm.cert_issued
     
-}
+# }
 
-module "acm" {
-    source = "./modules/acm"
-    providers = {
-        aws = aws.useast1
-    }  
+# module "acm" {
+#     source = "./modules/acm"
+#     providers = {
+#         aws = aws.useast1
+#     }  
 
-}
+# }
 
 output "cert" {
     value = "module.acm.cert"

@@ -1,6 +1,6 @@
 profile   = "devops-engineer"
 region    = "eu-west-1"
-ami       = "ami-0fb8881276a9bc6e8"
+ami       = "ami-00b1c9efd33fda707"
 key_name  = "devops-key"
 
 # VPC Networking range
@@ -35,5 +35,5 @@ project_networks = {
 # cloudfront components
 cld-region = "us-east-1"
 environment = "prod"
-goaldomain = "*.onaivstone.co.uk"
+goaldomain = "*.senistone.co.uk"
 site-index = "sitemaintenance.html"

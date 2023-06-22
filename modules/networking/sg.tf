@@ -101,5 +101,10 @@ locals {
         port = 443
         description = "allow traffic from alb"
         security_groups = [aws_security_group.alb.id]
+    },
+    {
+        port = 22
+        description = "allow traffic from bastion_servers"
+        security_groups = [aws_security_group.bastion-sg.id]
     }]
 }

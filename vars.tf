@@ -1,7 +1,3 @@
-
-
-
-
 variable "profile" {}
 variable "region" {}
 variable "key_name" {}
