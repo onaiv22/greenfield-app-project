@@ -19,26 +19,27 @@ pipeline {
                 """
             }
         }
-    }
-    stage('Terraform Init') {
+        stage('Terraform Init') {
             steps {
                 sh '''
                     terraform init
                 '''
             }
         }
-    stage('Terrfom Validate') {
-        steps {
-            sh '''
-                terraform validate
-            '''
-        }
+        stage('Terrfom Validate') {
+            steps {
+                sh '''
+                    terraform validate
+                '''
+            }
     }
-    stage('Terraform Plan') {
-        steps {
+        stage('Terraform Plan') {
+            steps {
                 sh "terraform plan -out greenfield-dev-test.tfplan;echo \$? > status"
                 stash name: "greenfield-dev-test", includes: "greenfield-dev-test.tfplan"
+            }
         }
     }
+
 }
 
